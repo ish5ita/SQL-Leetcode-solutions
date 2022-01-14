@@ -1,0 +1,13 @@
+Write an SQL query to report the nth highest salary from the Employee table. If there is no nth highest salary, the query should report null.
+CREATE FUNCTION getNthHighestSalary(X INT) RETURNS INT
+BEGIN
+    DECLARE Y INT;
+    SET Y=X-1; -- For offset variable
+    RETURN (
+        SELECT DISTINCT salary
+        FROM Employee
+        ORDER BY salary DESC
+        LIMIT 1
+        OFFSET Y
+    );
+END
