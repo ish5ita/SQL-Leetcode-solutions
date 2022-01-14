@@ -1,0 +1,10 @@
+CREATE FUNCTION getNthHighestSalary(X INT) RETURNS INT
+BEGIN
+
+    RETURN (
+        with result as ( 
+            select salary,dense_rank() over (order by salary desc) as denserank from employee 
+        )
+        select salary from result where result.denserank=x
+    );
+END
